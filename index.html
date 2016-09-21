@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
 
-    <title>SythProject</title>
+    <title>SynthProject</title>
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -15,6 +15,15 @@
 
 
 <body>
+
+    <h1>SynthProject</h1>
+
+    <button id="la440">La 440 hertz</button>
+
+    <input type="radio" name="ondes" value="sine" id="sine" onclick="check()" checked>Sine wave
+    <input type="radio" name="ondes" value="square" id="square" onclick="check()">Square wave
+    <input type="radio" name="ondes" value="sawtooth" id="sawtooth" onclick="check()">Sawtooth wave
+    <input type="radio" name="ondes" value="triangle" id="triangle" onclick="check()">Triangle wave
 
     <script src="js/synth.js"></script>
 
