@@ -6,8 +6,8 @@ la.addEventListener("mousedown", playosc);
 la.addEventListener("mouseup", stoposc);
 
 // déclaration du contexte audio et du futur oscillateur
-var contexteAudio = new window.AudioContext() || new window.webkitAudioContext();
-var oscillateur;
+var contexteAudio = new AudioContext();
+var oscillateur = {};
 
 // déclaration des variables contenant les inputs radios du html
 var sine = document.getElementById("sine"),
@@ -45,7 +45,7 @@ function check() {
 var refLa440 = 440;
 
 // variable contenant le calcul pour les 1/2 tons
-var calc = Math.pow(2, 1/12); // = 2 racine carrée ( 1/12 )
+const calc = Math.pow(2, 1 / 12); // = 2 racine carrée ( 1/12 )
 
 
 // Objet pour les frequences des notes
@@ -144,6 +144,153 @@ var notes = {
 };
 
 
+var mapKeyP = {
+    kDo: 113,
+    kDo_d: 122,
+    kRe: 115,
+    kRe_d: 101,
+    kMi: 100,
+    kFa: 102,
+    kFa_d: 116,
+    kSol: 103,
+    kSol_d: 121,
+    kLa: 104,
+    kLa_d: 117,
+    kSi: 106,
+
+    kDo2: 107,
+    kDo_d2: 111,
+    kRe2: 108,
+    kRe_d2: 112,
+    kMi2: 109,
+    kFa2: 249,
+    kFa_d2: 36,
+    kSol2: 42,
+};
+
+var mapKeyD = {
+    kDo: 81,
+    kDo_d: 90,
+    kRe: 83,
+    kRe_d: 69,
+    kMi: 68,
+    kFa: 70,
+    kFa_d: 84,
+    kSol: 71,
+    kSol_d: 89,
+    kLa: 72,
+    kLa_d: 85,
+    kSi: 74,
+
+    kDo2: 75,
+    kDo_d2: 79,
+    kRe2: 76,
+    kRe_d2: 80,
+    kMi2: 77,
+    kFa2: 192,
+    kFa_d2: 186,
+    kSol2: 220,
+};
+
+
+var keyP = document.getElementById("key");
+var keyD = document.getElementById("keyD");
+
+var do1 = false;
+var dod1 = false;
+var re1 = false;
+var red1 = false;
+var mi1 = false;
+var fa1 = false;
+var fad1 = false;
+var sol1 = false;
+var sold1 = false;
+var la1 = false;
+var lad1 = false;
+var si = false;
+
+var do2 = false;
+var dod2 = false;
+var re2 = false;
+var red2 = false;
+var mi2 = false;
+var fa2 = false;
+var fad2 = false;
+var sol2 = false;
+
+document.addEventListener("keydown", function (event) {
+    if(event.keyCode == mapKeyD.kDo) {
+        if(do1) return;
+        do1 = true;
+        playSynth(notes.do3);
+    }
+    else if(event.keyCode == mapKeyD.kDo_d) {
+        if(dod1) return;
+        dod1 = true;
+        playSynth(notes.do_d3);
+    }
+
+
+});
+
+document.addEventListener("keyup", function (event) {
+    if(event.keyCode == mapKeyD.kDo) {
+        do1 = false;
+        stopSynth();
+    }
+    else if(event.keyCode == mapKeyD.kDo_d) {
+        dod1 = false;
+        stopSynth();
+    }
+});
+
+
+// fonction KEYPRESS
+
+document.onkeypress=function(e){
+    e=e||window.event;
+    var key=e.which?e.which:event.keyCode;
+    keyP.innerHTML = 'KeyPress : '+ key;
+}
+
+
+// fonction KEYDOWN
+
+document.onkeydown=function(e){
+    e=e||window.event;
+    var key=e.which?e.which:event.keyCode;
+    keyD.innerHTML = 'Keydown/Up : '+ key;
+}
+
+
+// fonction KEYUP
+
+document.onkeyup=function(e){
+    e=e||window.event;
+    var keyU=e.which?e.which:event.keyCode;
+}
+
+function playSynth(note) {
+
+    /* join l'oscillateur au contexte audio, assigne la valeur 440hz à l'onde et connecte l'oscillateur au contexte audio */
+    oscillateur = contexteAudio.createOscillator()
+    oscillateur.frequency.value = note;
+    oscillateur.connect(contexteAudio.destination);
+
+    // lancement de la fonction qui sélectionne le type d'onde
+    check();
+
+    // lancement de l'oscillateur
+    oscillateur.start(contexteAudio.currentTime);
+
+}
+
+function stopSynth() {
+    oscillateur.stop(contexteAudio.currentTime);
+}
+
+
+
 
 /*---------------------------------------------*/
 
@@ -151,7 +298,7 @@ var notes = {
 // function qui définie et lance l'oscillateur
 function playosc() {
 
-    /* join l'oscillateur au contexte audio, assigne la valeur 440hz à l'onde et connecte l'oscillateur au contexte audio */
+    // join l'oscillateur au contexte audio, assigne la valeur 440hz à l'onde et connecte l'oscillateur au contexte audio
     oscillateur = contexteAudio.createOscillator()
     oscillateur.frequency.value = notes.la3;
     oscillateur.connect(contexteAudio.destination);
@@ -160,15 +307,13 @@ function playosc() {
     check();
 
     // lancement de l'oscillateur
-    oscillateur.start();
+    oscillateur.start(contexteAudio.currentTime);
 
 }
 
 // fonction qui stop l'oscillateur
 function stoposc() {
 
-    oscillateur.stop();
+    oscillateur.stop(contexteAudio.currentTime);
 
 }
-
-
