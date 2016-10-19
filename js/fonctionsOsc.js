@@ -1,10 +1,13 @@
-var contexteAudio = new AudioContext(),
-    contexteAudio2 = new AudioContext();
+var contexteAudio = new AudioContext();
 
-function playDo1(note) {
+osc = contexteAudio.createOscillator();
+
+osc.start();
+
+/*function playSynth(note) {
 
     // join l'oscillateur au contexte audio, assigne la valeur 440hz à l'onde et connecte l'oscillateur au contexte audio
-    osc = contexteAudio.createOscillator();
+
     osc.frequency.value = note;
     osc.connect(contexteAudio.destination);
 
@@ -12,26 +15,29 @@ function playDo1(note) {
     check();
 
     // lancement de l'oscillateur
-    osc.start(contexteAudio.currentTime);
+    //osc.start();
+
+}*/
+
+function frequ(note) {
+
+    osc.frequency.value = note;
+
 
 }
 
-function playDo_d1(note) {
+function playSynth() {
 
-    osc2 = contexteAudio2.createOscillator()
-    osc2.frequency.value = note;
-    osc2.connect(contexteAudio2.destination);
+    osc.connect(contexteAudio.destination);
 
     check();
 
-    osc2.start(contexteAudio2.currentTime);
-
 }
 
-function stopDo1() {
-    osc.stop(contexteAudio.currentTime);
+
+
+function stopSynth() {
+    osc.disconnect(contexteAudio.destination);
 }
 
-function stopDo_d1() {
-    osc2.stop(contexteAudio2.currentTime);
-}
+

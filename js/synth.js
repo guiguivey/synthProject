@@ -23,18 +23,22 @@ function check() {
     if (sine.checked === true) {
 
         oscillateur.type = "sine";
+        osc.type = "sine";
 
     } else if (square.checked === true) {
 
         oscillateur.type = "square";
+        osc.type = "square";
 
     } else if (sawtooth.checked === true) {
 
         oscillateur.type = "sawtooth";
+        osc.type = "sawtooth";
 
     } else if (triangle.checked === true) {
 
         oscillateur.type = "triangle";
+        osc.type = "triangle";
 
     }
 
@@ -65,53 +69,202 @@ document.onkeydown=function(e){
 }
 
 
-var do1 = false;
-var dod1 = false;
-var re1 = false;
-var red1 = false;
-var mi1 = false;
-var fa1 = false;
-var fad1 = false;
-var sol1 = false;
-var sold1 = false;
-var la1 = false;
-var lad1 = false;
-var si = false;
+var mapKey = mapKeyD;
 
-var do2 = false;
-var dod2 = false;
-var re2 = false;
-var red2 = false;
-var mi2 = false;
-var fa2 = false;
-var fad2 = false;
-var sol2 = false;
+tableau = 0;
+
+var bool1 = false,
+    bool2 = false,
+    bool3 = false,
+    bool4 = false,
+    bool5 = false,
+    bool6 = false,
+    bool7 = false,
+    bool8 = false,
+    bool9 = false,
+    bool10 = false,
+    bool11 = false,
+    bool12 = false,
+    bool13 = false,
+    bool14 = false,
+    bool15 = false,
+    bool16 = false,
+    bool17 = false,
+    bool18 = false,
+    bool19 = false,
+    bool20 = false;
 
 document.addEventListener("keydown", function (event) {
-    if(event.keyCode == mapKeyD.kDo) {
-        if(do1) return;
-        do1 = true;
-        playDo1(notes.do3);
-    }
-    else if(event.keyCode == mapKeyD.kDo_d) {
-        if(dod1) return;
-        dod1 = true;
-        playDo_d1(notes.do_d3);
-    }
 
+    playSynth();
+
+    if(event.keyCode == mapKey.kDo) {
+        if(bool1) return;
+        bool1 = true;
+        frequ(notes.do3);
+        tableau ++;
+        }
+    else if(event.keyCode == mapKey.kDo_d) {
+        if(bool2) return;
+        bool2 = true;
+        tableau ++;
+        frequ(notes.do_d3);
+    }
+    else if(event.keyCode == mapKey.kRe) {
+        if(bool3) return;
+        bool3 = true;
+        tableau ++;
+        frequ(notes.re3);
+    }
+    else if(event.keyCode == mapKey.kRe_d) {
+        if(bool4) return;
+        bool4 = true;
+        tableau ++;
+        frequ(notes.re_d3);
+    }
+    else if(event.keyCode == mapKey.kMi) {
+        if(bool5) return;
+        bool5 = true;
+        tableau ++;
+        frequ(notes.mi3);
+    }
+    else if(event.keyCode == mapKey.kFa) {
+        if(bool6) return;
+        bool6 = true;
+        tableau ++;
+        frequ(notes.fa3);
+    }
+    else if(event.keyCode == mapKey.kFa_d) {
+        if(bool7) return;
+        bool7 = true;
+        tableau ++;
+        frequ(notes.fa_d3);
+    }
+    else if(event.keyCode == mapKey.kSol) {
+        if(bool8) return;
+        bool8 = true;
+        tableau ++;
+        frequ(notes.sol3);
+    }
+    else if(event.keyCode == mapKey.kSol_d) {
+        if(bool9) return;
+        bool9 = true;
+        tableau ++;
+        frequ(notes.sol_d3);
+    }
+    else if(event.keyCode == mapKey.kLa) {
+        if(bool10) return;
+        bool10= true;
+        tableau ++;
+        frequ(notes.la3);
+    }
+    else if(event.keyCode == mapKey.kLa_d) {
+        if(bool11) return;
+        bool11 = true;
+        tableau ++;
+        frequ(notes.la_d3);
+    }
+    else if(event.keyCode == mapKey.kSi) {
+        if(bool12) return;
+        bool12 = true;
+        tableau ++;
+        frequ(notes.si3);
+    }
+    else if(event.keyCode == mapKey.kDo2) {
+        if(bool13) return;
+        bool13 = true;
+        tableau ++;
+        frequ(notes.do4);
+    }
+    else if(event.keyCode == mapKey.kDo_d2) {
+        if(bool14) return;
+        bool14 = true;
+        tableau ++;
+        frequ(notes.do_d4);
+    }
+    else if(event.keyCode == mapKey.kRe2) {
+        if(bool15) return;
+        bool15 = true;
+        tableau ++;
+        frequ(notes.re4);
+    }
+    else if(event.keyCode == mapKey.kRe_d2) {
+        if(bool16) return;
+        bool16 = true;
+        tableau ++;
+        frequ(notes.re_d4);
+    }
+    else if(event.keyCode == mapKey.kMi2) {
+        if(bool17) return;
+        bool17 = true;
+        tableau ++;
+        frequ(notes.mi4);
+    }
+    else if(event.keyCode == mapKey.kFa2) {
+        if(bool18) return;
+        bool18 = true;
+        tableau ++;
+        frequ(notes.fa4);
+    }
+    else if(event.keyCode == mapKey.kFa_d2) {
+        if(bool19) return;
+        bool19 = true;
+        tableau ++;
+        frequ(notes.fa_d4);
+    }
+    else if(event.keyCode == mapKey.kSol2) {
+        if(bool20) return;
+        bool20 = true;
+        tableau ++;
+        frequ(notes.sol4);
+    }
+    //else {stopSynth()}
 });
+
+/*document.addEventListener("keypress", function (event) {
+        if(event.metaKey === true) {
+            stopSynth();
+        }
+});*/
 
 
 document.addEventListener("keyup", function (event) {
-    if(event.keyCode == mapKeyD.kDo) {
-        do1 = false;
-        stopDo1();
+    bool1 = false;
+    bool2 = false;
+    bool3 = false;
+    bool4 = false;
+    bool5 = false;
+    bool6 = false;
+    bool7 = false;
+    bool8 = false;
+    bool9 = false;
+    bool10 = false;
+    bool11 = false;
+    bool12 = false;
+    bool13 = false;
+    bool14 = false;
+    bool15 = false;
+    bool16 = false;
+    bool17 = false;
+    bool18 = false;
+    bool19 = false;
+    bool20 = false;
+    tableau --;
+//    stopSynth();
+    console.log(tableau);
+
+    if(tableau === 0) {
+        stopSynth();
+    }
+
+    /*if(event.keyCode == mapKeyD.kDo) {
+        stopSynth();
     }
     else if(event.keyCode == mapKeyD.kDo_d) {
-        dod1 = false;
-        stopDo_d1();
-    }
+        stopSynth();
+    }*/
 });
+
 
 
 /*---------------------------------------------*/
